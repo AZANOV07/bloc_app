@@ -30,8 +30,11 @@ class _TaskViewState extends State<TaskView> {
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        IconButton(onPressed: ()=> context.read<TaskCubit>().deleteData(index), icon: Icon(Icons.delete)),
-                        IconButton(onPressed: (){}, icon: Icon(Icons.edit)),
+                        IconButton(
+                            onPressed: () =>
+                                context.read<TaskCubit>().deleteData(index),
+                            icon: Icon(Icons.delete)),
+                        IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
                       ],
                     ),
                   ),
@@ -60,15 +63,16 @@ class _TaskViewState extends State<TaskView> {
                           }
                         },
                         child: Text('yes')),
-                    TextButton(onPressed: () {
-                      Navigator.pop(context);
-                    }, child: Text('no')),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text('no')),
                   ],
                 );
               });
         },
       ),
-
     );
   }
 }

@@ -6,18 +6,20 @@ part 'task_state.dart';
 class TaskCubit extends Cubit<TaskState> {
   TaskCubit() : super(const TaskState());
 
-
-  void addData(String newData){
-    emit(TaskState(task: [...state.task,newData]));
+  void addData(String newData) {
+    emit(TaskState(task: [...state.task, newData]));
   }
 
-  void updateData(){
-
+  void updateData(index) {
+    List<String> updatedList = [...state.task];
+    updatedList.where(index);
+    emit(TaskState(task: updatedList));
   }
 
-  void deleteData(int index){
+  void deleteData(int index) {
     List<String> updatedList = [...state.task];
     updatedList.removeAt(index);
     emit(TaskState(task: updatedList));
   }
+
 }

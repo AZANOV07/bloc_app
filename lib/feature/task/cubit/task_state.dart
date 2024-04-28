@@ -6,4 +6,3 @@ part of 'task_cubit.dart';
    const TaskState({this.task = const ['Hello', 'Hi']});
 }
 
-
