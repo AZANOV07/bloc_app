@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 
 part 'task_state.dart';
 
@@ -10,10 +9,14 @@ class TaskCubit extends Cubit<TaskState> {
     emit(TaskState(task: [...state.task, newData]));
   }
 
-  void updateData(index) {
-    List<String> updatedList = [...state.task];
-    updatedList.where(index);
-    emit(TaskState(task: updatedList));
+  void updateData(int index, String newTask) {
+    List<String> updatedList = List.from(state.task);
+    if (index >= 0 && index < updatedList.length) {
+      updatedList[index] = newTask;
+      emit(TaskState(task: updatedList));
+    } else {
+      print('Ошибка: Недопустимый индекс для обновления задачи');
+    }
   }
 
   void deleteData(int index) {

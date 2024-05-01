@@ -11,6 +11,7 @@ class TaskView extends StatefulWidget {
 
 class _TaskViewState extends State<TaskView> {
   TextEditingController taskControler = TextEditingController();
+  TextEditingController addControler = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,42 @@ class _TaskViewState extends State<TaskView> {
                             onPressed: () =>
                                 context.read<TaskCubit>().deleteData(index),
                             icon: Icon(Icons.delete)),
-                        IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                        IconButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text('Редактировать задачу'),
+                                  content: TextField(
+                                    controller:
+                                        addControler, // Используйте контроллер для редактирования текста
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        if (addControler.text.isNotEmpty) {
+                                          context.read<TaskCubit>().updateData(
+                                              index, addControler.text);
+                                          Navigator.pop(context);
+                                          addControler.clear();
+                                        }
+                                      },
+                                      child: Text('Да'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text('Нет'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          icon: Icon(Icons.edit),
+                        ),
                       ],
                     ),
                   ),
